@@ -89,5 +89,6 @@ class BaseBuzzerBoard(BaseDigitalBoard):
         one_buzzer: BaseDigitalSensor = self._sensors.copy().popitem()[-1]
         while event.wait():
             one_buzzer.on()
-            time.sleep(2)
+            time.sleep(1)
             one_buzzer.off()
+            time.sleep(1)
