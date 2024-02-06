@@ -25,10 +25,12 @@ class BaseDigitalSensor:
 
     def on(self) -> None:
         digitalWrite(self._pin, 1)
+        # print(f"{self._pin} >> ON")
         self._is_on = True
 
     def off(self) -> None:
         digitalWrite(self._pin, 0)
+        # print(f"{self._pin} >> OFF")
         self._is_on = False
 
     @property
