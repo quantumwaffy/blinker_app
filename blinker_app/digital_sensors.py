@@ -5,13 +5,13 @@ from typing import Any, Unpack
 from grovepi import digitalWrite, pinMode
 
 
-class Led:
-    __instances: dict[int, Led] = {}
+class BaseDigitalSensor:
+    __instances: dict[int, BaseDigitalSensor] = {}
 
-    def __new__(cls, **kwargs: Unpack[dict[str, Any]]) -> Led:
+    def __new__(cls, **kwargs: Unpack[dict[str, Any]]) -> BaseDigitalSensor:
         pin: int = kwargs["pin"]
         if not (instance := cls.__instances.get(pin)):
-            instance: Led = super().__new__(cls)
+            instance: BaseDigitalSensor = super().__new__(cls)
             instance.__is_initialized = False
             cls.__instances[pin] = instance
         return instance
@@ -25,12 +25,10 @@ class Led:
 
     def on(self) -> None:
         digitalWrite(self._pin, 1)
-        # print(f"{self._pin} ON")
         self._is_on = True
 
     def off(self) -> None:
         digitalWrite(self._pin, 0)
-        # print(f"{self._pin} OFF")
         self._is_on = False
 
     @property
